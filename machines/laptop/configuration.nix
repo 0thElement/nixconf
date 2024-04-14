@@ -36,6 +36,8 @@
     LC_TELEPHONE = "vi_VN";
     LC_TIME = "vi_VN";
   };
+  i18n.inputMethod.enabled = "fcitx5";
+  i18n.inputMethod.fcitx5.addons = with pkgs; [ fcitx5-mozc fcitx5-unikey ];
 
   services.xserver = {
     enable = true;
