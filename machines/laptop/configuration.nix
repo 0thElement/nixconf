@@ -75,7 +75,7 @@
   users.users.zeroth = {
     isNormalUser = true;
     description = "0thElement";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "docker" ];
     shell = pkgs.fish;
     uid = 1000;
     packages = with pkgs; [];
@@ -89,13 +89,14 @@
   };
 
   services.getty.autologinUser = "zeroth";
-
   nixpkgs.config.allowUnfree = true;
+  virtualisation.docker.enable = true;
 
   environment.systemPackages = with pkgs; [
     vim
     neovim
     wget
+    docker-compose
   ];
 
   fonts = {

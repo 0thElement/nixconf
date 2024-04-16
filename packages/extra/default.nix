@@ -9,7 +9,12 @@ with lib;
   home.packages = with pkgs; [
     discord
     killall
+    feh
+    vlc
+    ffmpeg
+    blender
     dotnet-sdk
+    cargo
   ];
 
   nixpkgs = {
