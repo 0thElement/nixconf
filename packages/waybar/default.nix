@@ -16,7 +16,7 @@ with lib;
     @define-color lightgray  #686868;
     @define-color darkgray   #393a4d;
     @define-color red        #ec6a88;
-    @define-color purp       #b072d1;
+    @define-color purp       rgba(176, 114, 209,0.6);
 
     @define-color black-transparent-1 rgba(41, 42, 55, 0.1);
     @define-color black-transparent-2 rgba(41, 42, 55, 0.2);
@@ -81,7 +81,7 @@ with lib;
 
     #workspaces button.focused,
     #workspaces button.active {
-      background-color: @black-transparent-6;
+      background-color: @purp;
       color: @white;
       transition: all 0.3s ease;
       animation: colored-gradient 10s ease infinite;
