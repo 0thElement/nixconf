@@ -16,6 +16,7 @@ with lib;
     @define-color lightgray  #686868;
     @define-color darkgray   #393a4d;
     @define-color red        #ec6a88;
+    @define-color purp       #b072d1;
 
     @define-color black-transparent-1 rgba(41, 42, 55, 0.1);
     @define-color black-transparent-2 rgba(41, 42, 55, 0.2);
@@ -25,7 +26,7 @@ with lib;
     @define-color black-transparent-6 rgba(41, 42, 55, 0.6);
     @define-color black-transparent-7 rgba(41, 42, 55, 0.7);
     @define-color black-transparent-8 rgba(41, 42, 55, 0.8);
-    @define-color black-transparent-9 rgba(41, 42, 55, 0.9);
+    @define-color black-transparent-9 rgba(41, 42, 56, 0.9);
     @define-color black-solid         rgba(41, 42, 55, 1.0);
 
     * {
@@ -34,18 +35,17 @@ with lib;
     }
 
     window#waybar {
-      background-color: @black-solid;
+      background-color: rgba(0,0,0,0);
       color: @text;
       border-radius: 8px;
-      border: 1px solid @black-transparent-9;
-      /* border:  solid rgba(0, 0, 0, 0.0); */
     }
 
     tooltip {
       background: @black-solid;
       border: 1px solid @darkgray;
-      border-radius: 7px;
+      border-radius: 8px;
     }
+
     tooltip label {
       color: @text;
     }
@@ -55,27 +55,25 @@ with lib;
       /* border-radius: 20px; */
       /* margin-top: 0; */
       /* margin-bottom: 0; */
+      margin-top: 10px;
       margin-left: 1px;
       margin-right: 1px;
     }
 
     #workspaces button {
-      background-color: transparent;
-      color: @lightgray;
-      padding: 0;
-      /* margin: 0; */
-      margin-top: 3px;
-      margin-bottom: 3px;
-      /* margin-left: 1px;
-      margin-right: 1px; */
-      border-radius: 6px;
+      background-color: @transparent;
+      color: @text;
+      margin-bottom: 6px;
+      padding-top: 2px;
+      padding-bottom: 2px;
+      border-radius: 8px;
       transition: all 0.3s ease;
     }
 
     #workspaces button:hover {
+      background-color: @black-transparent-6;
       box-shadow: inherit;
       text-shadow: inherit;
-      background: transparent;
       border: 1px solid rgba(0, 0, 0, 0.0);
       color: @white;
       transition: all 0.3s ease;
@@ -83,8 +81,7 @@ with lib;
 
     #workspaces button.focused,
     #workspaces button.active {
-      /* background-color: @darkgray; */
-      /* border: 1px solid @darkgray; */
+      background-color: @black-transparent-6;
       color: @white;
       transition: all 0.3s ease;
       animation: colored-gradient 10s ease infinite;
@@ -101,8 +98,6 @@ with lib;
       color: @black;
       transition: all 0.3s ease;
     }
-
-    /* #workspaces button.hidden {} */
 
     #taskbar {
       border-radius: 8px;
@@ -138,8 +133,6 @@ with lib;
       animation: colored-gradient 10s ease infinite;
     }
 
-    /* #taskbar button.fullscreen {} */
-
     /* -------------------------------------------------------------------------------- */
 
     #custom-launcher,
@@ -166,7 +159,6 @@ with lib;
       margin-bottom: 8px;
       margin-left: 0;
       margin-right: 0;
-      /* border: 1px solid @darkgray; */
       border-radius: 20px;
       transition: all 0.3s ease;
     }
@@ -215,7 +207,7 @@ with lib;
     .modules-left > widget:first-child > #clock,
     .modules-left > widget:first-child > #custom-powermenu,
     .modules-left > widget:first-child > #custom-notification {
-      margin-top: 10px;
+      margin-top: 0;
     }
 
     .modules-right > widget:last-child > #workspaces button,
@@ -238,12 +230,24 @@ with lib;
       margin-bottom: 10px;
     }
 
+    .modules-left {
+      background-color: transparent;
+      margin-left: 8px;
+      margin-right: 2px;
+      margin-top: 3px;
+      margin-bottom: 10px;
+      padding-top: 7px;
+      padding-bottom: 7px;
+      border-radius: 8px;
+    }
+
     /* -------------------------------------------------------------------------------- */
 
     #tray {
       background-color: transparent;
       padding: 1px 8px;
     }
+
     #tray > .passive {
       -gtk-icon-effect: dim;
     }
@@ -270,6 +274,7 @@ with lib;
         "network#eno1"
         "bluetooth"
         "tray"
+        "hyprland/workspaces"
       ];
       "custom/notification" = {
         tooltip = false;
@@ -303,12 +308,6 @@ with lib;
           };
         };
       };
-      modules-center = [
-        "hyprland/workspaces"
-        "hyprland/submap"
-        "sway/workspaces"
-        "sway/mode"
-      ];
       "hyprland/workspaces" = {
         format = "{icon}";
         format-icons = {
@@ -354,11 +353,11 @@ with lib;
         tooltip = false;
       };
       modules-right = [
-        # "cpu"
-        # "memory"
-        "backlight"
+        "cpu"
+        "memory"
+        # "backlight"
         # "pulseaudio#microphone"
-        # "battery"
+        "battery"
         "clock"
       ];
       tray = {
@@ -366,12 +365,12 @@ with lib;
         spacing = 8;
       };
       cpu = {
-        format = "󰻠 {usage}%";
+        format = "󰻠 {usage}";
         on-click = "";
         tooltip = false;
       };
       memory = {
-        format = "󰍛 {used:0.1f}GB ({percentage}%) / {total:0.1f}GB";
+        format = "󰍛 {percentage}";
         on-click = "";
         tooltip = false;
       };
@@ -466,9 +465,9 @@ with lib;
           warning = 30;
           critical = 1;
         };
-        format = "{icon} {capacity}%";
-        format-charging = "󰂄 {capacity}%";
-        format-plugged = "󱘖 {capacity}%";
+        format = "{icon} {capacity}";
+        format-charging = "󰂄 {capacity}";
+        format-plugged = "󱘖 {capacity}";
         format-icons = [
           "󰁺"
           "󰁻"
