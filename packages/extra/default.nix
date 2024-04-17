@@ -13,8 +13,6 @@ with lib;
     vlc
     ffmpeg
     blender
-    dotnet-sdk
-    cargo
   ];
 
   nixpkgs = {

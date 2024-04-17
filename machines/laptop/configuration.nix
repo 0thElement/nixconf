@@ -97,6 +97,7 @@
     neovim
     wget
     docker-compose
+    steam-run
   ];
 
   fonts = {
