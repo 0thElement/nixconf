@@ -3,9 +3,7 @@
 
 {
   imports = [
-    ./hardware-configuration.nix
-    inputs.home-manager.nixosModules.default
-  ];
+    ./hardware-configuration.nix inputs.home-manager.nixosModules.default ];
 
   nix = {
     settings.auto-optimise-store = true;
@@ -71,6 +69,8 @@
     nvidia.modesetting.enable = true;
   };
 
+  programs.nix-ld.enable = true;
+
   programs.fish.enable = true;
   users.users.zeroth = {
     isNormalUser = true;
@@ -99,6 +99,12 @@
     docker-compose
     steam-run
   ];
+
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = true;
+    dedicatedServer.openFirewall = true;
+  };
 
   fonts = {
     packages = with pkgs; [

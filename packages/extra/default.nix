@@ -6,14 +6,30 @@ with lib;
     package = pkgs.vscode.fhs;
   };
 
+  home.pointerCursor = {
+    gtk.enable = true;
+    name = "Catppuccin-Macchiato-Dark-Cursors";
+    package = pkgs.catppuccin-cursors.macchiatoDark;
+    size = 16;
+  };
+
   home.packages = with pkgs; [
-    discord
+    # CLI
     killall
-    feh
-    vlc
-    ffmpeg
+    # Media
+    feh vlc ffmpeg
+    # Tools
     blender
+    obs-studio
+    # Dev
+    dotnet-sdk
+    jdk
+    rustup nodejs
+    # Misc
+    vesktop
   ];
+
+  home.sessionPath = [ "/home/zeroth/.cargo/bin/" ];
 
   nixpkgs = {
     config = {
