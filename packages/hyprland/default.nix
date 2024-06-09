@@ -2,10 +2,9 @@
 with lib;
 {
   home.packages = with pkgs; [
-    rofi wofi wl-clipboard hyprland hyprpaper grimblast
+    wl-clipboard hyprland hyprpaper grimblast
   ];
 
   home.file.".config/hypr/hyprland.conf".source = ./hyprland.conf;
   home.file.".config/hypr/hyprpaper.conf".source = ./hyprpaper.conf;
-  home.file.".config/wofi.css".source = ./wofi.css;
 }

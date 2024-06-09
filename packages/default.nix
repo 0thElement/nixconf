@@ -9,6 +9,7 @@
     ./dunst
     ./gtk
     ./fish
+    ./rofi
     ./nvim
     ./git
     ./firefox
