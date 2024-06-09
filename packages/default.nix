@@ -6,7 +6,6 @@
     ./alacritty
     ./hyprland
     ./waybar
-    ./dunst
     ./gtk
     ./fish
     ./rofi

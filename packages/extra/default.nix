@@ -17,10 +17,12 @@ with lib;
     # CLI
     killall
     # Media
-    feh vlc ffmpeg
+    vlc ffmpeg
     # Tools
     blender
     obs-studio
+    imv
+    rhythmbox
     # Dev
     dotnet-sdk
     jdk
