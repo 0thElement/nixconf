@@ -22,9 +22,15 @@ with lib;
     rustup nodejs
     # Misc
     vesktop
+    xwaylandvideobridge
   ];
 
   home.sessionPath = [ "/home/zeroth/.cargo/bin/" ];
+  home.file."home/zeroth/.config/xdg-desktop-portal/hyprland-portals.conf".text = ''
+    [preferred]
+    default=hyprland;gtk
+    org.free.impl.portal.FileChooser=kde
+  '';
 
   nixpkgs = {
     config = {
