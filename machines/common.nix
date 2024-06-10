@@ -2,7 +2,10 @@
 { config, pkgs, inputs, ... }:
 
 {
-  imports = [ inputs.home-manager.nixosModules.default ];
+  imports = [
+    inputs.home-manager.nixosModules.default
+    inputs.xremap-flake.nixosModules.default
+  ];
 
   nix = {
     settings.auto-optimise-store = true;
@@ -136,6 +139,27 @@
     alsa.support32Bit = true;
     pulse.enable = true;
     jack.enable = true;
+  };
+
+  services.xremap = {
+    withWlroots = true;
+    userName = "zeroth";
+    yamlConfig = ''
+      modmap:
+        - name: CapsLock to RightCtrl/Esc
+          remap:
+            CapsLock:
+              held: Ctrl_R
+              alone: Esc
+              alone_timeout: 500
+      keymap:
+        - name: RightAlt+hjkl to Arrows
+          remap:
+            Alt_R-h: Left
+            Alt_R-l: Right
+            Alt_R-j: Down
+            Alt_R-k: Up
+    '';
   };
 
   # Some programs need SUID wrappers, can be configured further or are
