@@ -6,7 +6,7 @@
   home.stateVersion = "23.11"; # Do not change this, future me!
 
   imports = [
-    ./../../packages
+    ./../packages
   ];
 
   home.packages = [
