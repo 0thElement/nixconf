@@ -1,5 +1,4 @@
-{ pkgs, lib, config, ... }:
-with lib;
+{ pkgs, ... }:
 {
   imports = [ ./starship.nix ];
 
@@ -66,9 +65,10 @@ with lib;
       vi = "nvim";
       
       #DIRECTORY
-      la = "eza -la --color=always --group-directories-first";
-      ll = "eza -l --color=always --group-directories-first";
-      lt = "eza -aT --color=always --group-directories-first";
+      ls = "eza --color=always --icons --group-directories-first";
+      la = "eza -la --color=always --icons --group-directories-first";
+      ll = "eza -l --color=always --icons --group-directories-first";
+      lt = "eza -aT --color=always --icons --group-directories-first";
       #"l." = "eza -a | egrep \"^\.\"";
   
       #GREP
@@ -85,9 +85,11 @@ with lib;
       mkdir = "mkdir -pv";
       
       #CONFIG
-      toconf = "cd /etc/nixos/";
-      ns = "sudo nixos-rebuild switch --flake /etc/nixos#default";
-      nt = "sudo nixos-rebuild test --flake /etc/nixos#default";
+      toconf = "cd ~/nixconf/";
+      ns = "sudo nixos-rebuild switch --flake ~/nixconf#default";
+      nt = "sudo nixos-rebuild test --flake ~/nixconf#default";
+      v = "nvim";
+      nc = "toconf && nvim . && prevd";
     };
   };
 

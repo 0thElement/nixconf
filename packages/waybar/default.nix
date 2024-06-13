@@ -1,5 +1,4 @@
-{ pkgs, lib, input, ...}:
-with lib;
+{ pkgs, ...}:
 {
   home.packages = [
     pkgs.brightnessctl

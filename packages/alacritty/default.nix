@@ -1,5 +1,4 @@
-{ pkgs, input, lib, ... }:
-with lib;
+{ ... }:
 let
   makeFont = style: { family = "Source Code Pro"; style = style; };
 in

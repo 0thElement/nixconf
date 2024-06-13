@@ -1,8 +1,12 @@
-{ inputs, pkgs, lib, config, ... }:
-with lib;
+{ pkgs, ... }:
 {
   home.packages = with pkgs; [
-    wl-clipboard hyprland hyprpaper grimblast
+      hyprland
+      hyprpaper
+      grim
+      slurp
+      swappy
+      wl-clipboard
   ];
 
   home.file.".config/hypr/hyprland.conf".source = ./hyprland.conf;

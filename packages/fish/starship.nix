@@ -1,5 +1,4 @@
-{ pkgs, lib, config, ... }:
-with lib;
+{ pkgs, ... }:
 {
   home.packages = [
     pkgs.starship

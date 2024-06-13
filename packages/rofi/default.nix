@@ -1,5 +1,4 @@
-{ inputs, pkgs, lib, config, ... }:
-with lib;
+{ pkgs, config, ... }:
 {
   nixpkgs.overlays = [(final: prev: {
     rofi-calc = prev.rofi-calc.override { rofi-unwrapped = prev.rofi-wayland-unwrapped; };

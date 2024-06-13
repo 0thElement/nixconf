@@ -1,39 +1,66 @@
-{  lib, config, pkgs, ... }:
-with lib;
-let
-  cfg = config.modules.nvim;
-  jabuti-nvim = pkgs.vimUtils.buildVimPlugin {
-    name = "jabuti-nvim";
-    src = pkgs.fetchFromGitHub {
-      owner = "jabuti-theme";
-      repo = "jabuti-nvim";
-      rev = "17f1b94cbf1871a89cdc264e4a8a2b3b4f7c76d2";
-      sha256 = "sha256-iPjwx/rTd98LUPK1MUfqKXZhQ5NmKx/rN8RX1PIuDFA=";
-    };
-  };
-in {
+{  pkgs, ... }:
+{
   home.file.".config/nvim/settings.lua".source = ./init.lua;
-        
-  home.packages = with pkgs; [
-    sumneko-lua-language-server stylua # Lua
-  ];
 
+  home.packages = with pkgs; [ nil ripgrep fzf ];
+        
   programs.neovim = {
     enable = true;
     plugins = with pkgs.vimPlugins; [ 
+      # Idk
       vim-nix
       plenary-nvim
+
+      # Aesthetic
+      vim-airline
+      vim-gitgutter
       {
-        plugin = jabuti-nvim;
-        config = "colorscheme jabuti";
+        plugin = catppuccin-nvim;
+        config = ''
+          colorscheme catppuccin
+          lua << EOF
+          require('catppuccin').setup {
+            color_overides = {
+              all = {
+                base = "#292a37"
+              }
+            }
+          }
+          EOF
+        '';
       }
       {
-        plugin = impatient-nvim;
-        config = "lua require('impatient')";
+        plugin = nvim-web-devicons;
+        config = "lua require('nvim-web-devicons').setup()";
       }
       {
-        plugin = lualine-nvim;
-        config = "lua require('lualine').setup()";
+        plugin = oil-nvim;
+        config = "lua require('oil').setup()";
+      }
+
+      # LSP
+      {
+        plugin = nvim-lspconfig;
+        config = "lua require('lspconfig').nil_ls.setup({})";
+      }
+      {
+        plugin = lsp_signature-nvim;
+        config = "lua require('lsp_signature').setup()";
+      }
+      {
+        plugin = nvim-cmp;
+        config = "lua require('cmp').setup()";
+      }
+      {
+        plugin = rustaceanvim;
+      }
+
+      # Tools
+      vim-commentary
+      vim-surround
+      {
+        plugin = autoclose-nvim;
+        config = "lua require('autoclose').setup()";
       }
       {
         plugin = telescope-nvim;
@@ -42,28 +69,6 @@ in {
       {
         plugin = indent-blankline-nvim;
         config = "lua require('ibl').setup()";
-      }
-      {
-        plugin = nvim-lspconfig;
-        config = ''
-        lua << EOF
-        require('lspconfig').rust_analyzer.setup{}
-        require('lspconfig').lua_ls.setup{}
-        EOF
-        '';
-      }
-      {
-        plugin = nvim-treesitter;
-        config = ''
-        lua << EOF
-        require('nvim-treesitter.configs').setup {
-          highlight = {
-            enable = true,
-            additional_vim_regex_highlighting = false,
-          },
-        }
-        EOF
-        '';
       }
     ];
     extraConfig = ''

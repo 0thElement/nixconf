@@ -1,5 +1,5 @@
 
-{ config, pkgs, inputs, ... }:
+{ pkgs, inputs, ... }:
 
 {
   imports = [
@@ -50,8 +50,7 @@
   environment.sessionVariables = {
     WLR_HARDWARE_CURSORS = "1";
     NIXOS_OZONE_WL = "1";
-    NIXOS_CONFIG = "/etc/nixos/configuration.nix";
-    NIXOS_CONFIG_DIR = "/etc/nixos/";
+    NIXOS_CONFIG = "/home/zeroth/nixconf/";
   };
 
   programs.hyprland = {
@@ -73,8 +72,6 @@
     opengl.enable = true;
     nvidia.modesetting.enable = true;
   };
-
-  programs.nix-ld.enable = true;
 
   programs.fish.enable = true;
   users.users.zeroth = {

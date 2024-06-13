@@ -1,5 +1,4 @@
-{ pkgs, lib, config, ... } :
-with lib;
+{ pkgs, ... } :
 {
   programs.vscode = {
     enable = true;
@@ -10,12 +9,14 @@ with lib;
     # CLI
     killall
     # Media
-    vlc ffmpeg
+    vlc
+    ffmpeg
+    imv
+    rhythmbox
     # Tools
     blender
     obs-studio
-    imv
-    rhythmbox
+    hyprpicker
     # Dev
     dotnet-sdk
     jdk
