@@ -24,7 +24,7 @@
 
   dconf.settings = {
     "org/gnome/desktop/interface" = {
-      gtk-key-theme = "Emacs";
+      gtk-key-theme = "Default";
       cursor-theme = "Catppuccin-Macchiato-Dark-Cursors";
     };
   };
