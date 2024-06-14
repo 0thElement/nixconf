@@ -15,16 +15,16 @@ augroup END
 autocmd FileType nix setlocal shiftwidth=2
 ]]
 
--- Keybinds
+-- KEYBINDS --
 local map = vim.api.nvim_set_keymap
 local opts = { silent = true, noremap = true }
-
 g.mapleader = ' '
 
--- Plugins
-map("n", "-", "<CMD>Oil<CR>", opts)
-map('n', '<C-n>', ':Telescope live_grep <CR>', opts)
-map('n', '<C-f>', ':Telescope find_files <CR>', opts)
+-- Navigation
+map("n", "-", "<CMD>Oil --float<CR>", opts)
+map('n', '<C-n>', '<CMD>Telescope live_grep <CR>', opts)
+map('n', '<C-f>', '<CMD>Telescope find_files <CR>', opts)
+map('n', '<C-\\>', '<CMD>ToggleTerm<CR>', opts)
 
 -- Buffers
 map('n', '<C-h>', "<C-w>h", opts)
@@ -36,7 +36,7 @@ map('n', '<C-l>', "<C-w>l", opts)
 map('n', '<C-s>', ':w<cr>', opts)
 
 -- Clear search
-map('n', '<C-x>', '<CMD>:noh<CR>', opts)
+map('n', '<C-X>', '<CMD>:noh<CR>', opts)
 
 -- Undo breakpoints in insert mode
 undobreaks = {
@@ -64,6 +64,42 @@ map('n', 'J', 'mzJ`z', opts)
 map('n', 'H', '^', opts)
 map('n', 'L', '$', opts)
 
+-- Tab
+vim.keymap.set('v', '<', '<gv', opts)
+vim.keymap.set('v', '>', '>gv', opts) 
+
+-- Harpoon
+local harpoon = require('harpoon')
+vim.keymap.set("n", "=", function() harpoon:list():add() end)
+
+vim.keymap.set("n", "<C-1>", function() harpoon:list():select(1) end)
+vim.keymap.set("n", "<C-2>", function() harpoon:list():select(2) end)
+vim.keymap.set("n", "<C-3>", function() harpoon:list():select(3) end)
+vim.keymap.set("n", "<C-4>", function() harpoon:list():select(4) end)
+vim.keymap.set("n", "<C-5>", function() harpoon:list():select(5) end)
+vim.keymap.set("n", "<C-6>", function() harpoon:list():select(6) end)
+vim.keymap.set("n", "<C-7>", function() harpoon:list():select(7) end)
+vim.keymap.set("n", "<C-8>", function() harpoon:list():select(8) end)
+vim.keymap.set("n", "<C-9>", function() harpoon:list():select(9) end)
+
+vim.keymap.set("n", "[[", function() harpoon:list():prev({ui_nav_wrap = true}) end)
+vim.keymap.set("n", "]]", function() harpoon:list():next({ui_nav_wrap = true}) end)
+
+vim.keymap.set("n", "<C-e>", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
+
+vim.api.nvim_set_keymap('n', '<F2>', '<cmd>lua require("renamer").rename()<cr>', opts)
+
+-- Commenting
+map('n', '<C-/>', ':Commentary<CR>', opts)
+map('v', '<C-/>', ":'<,'>Commentary<CR>", opts)
+
+-- Others
+require('nvim-autopairs').setup()
+vim.keymap.set({'v', 'n'}, '<C-.>', require("actions-preview").code_actions)
+vim.keymap.set('n','gD','<cmd>lua vim.lsp.buf.declaration()<CR>')
+vim.keymap.set('n','gd','<cmd>lua vim.lsp.buf.definition()<CR>')
+
+-- OPTIONS --
 -- Performance
 o.lazyredraw = true;
 o.shell = "fish"
@@ -79,7 +115,7 @@ o.undofile = true
 o.smartindent = true
 o.tabstop = 4
 o.shiftwidth = 4
-o.shiftround = true
+o.shiftround = true;
 o.expandtab = true
 o.scrolloff = 3
 

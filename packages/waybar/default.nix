@@ -73,7 +73,6 @@
       background-color: @black-transparent-6;
       box-shadow: inherit;
       text-shadow: inherit;
-      border: 1px solid rgba(0, 0, 0, 0.0);
       color: @white;
       transition: all 0.3s ease;
     }
@@ -259,7 +258,7 @@
     settings = [{
       layer = "top";
       position = "left";
-      width = 24;
+      width = 16;
       margin-top = 10;
       margin-bottom = 10;
       margin-left = 5;
