@@ -12,9 +12,9 @@ Disclaimer: This repository is mostly made for my personal use case. You'll prob
 
 ### Credits:
 
-Transendium for the ![background image](https://www.pixiv.net/artworks/117817706)
+Transendium for the background image: https://www.pixiv.net/artworks/117817706
 
-Original configuration based on ![notusknot's](https://github.com/notusknot/dotfiles-nix)
+Original configuration based on notusknot's dotfiles: https://github.com/notusknot/dotfiles-nix
 
 ### Info:
 - Terminal emulator: Alacritty
