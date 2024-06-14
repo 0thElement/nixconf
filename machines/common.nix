@@ -103,6 +103,8 @@
     at-spi2-core
   ];
 
+  programs.nix-ld.enable = true;
+
   programs.steam = {
     enable = true;
     remotePlay.openFirewall = true;
