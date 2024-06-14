@@ -6,8 +6,6 @@
   };
 
   home.packages = with pkgs; [
-    # CLI
-    killall
     # Media
     vlc
     ffmpeg
@@ -16,7 +14,7 @@
     # Tools
     blender
     obs-studio
-    hyprpicker
+    btop
     # Dev
     dotnet-sdk
     jdk

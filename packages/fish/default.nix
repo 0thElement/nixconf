@@ -2,11 +2,18 @@
 {
   imports = [ ./starship.nix ];
 
-  home.packages = [
-    pkgs.fish
-    pkgs.pfetch-rs
-    pkgs.eza
+  home.packages = with pkgs; [
+    fish
+    pfetch-rs
+    eza
+    bat
+    killall
   ];
+
+  programs.zoxide = {
+    enable = true;
+    enableFishIntegration = true;
+  };
 
   home.sessionVariables = {
     PF_INFO = "ascii title os host kernel uptime memory";
@@ -64,17 +71,13 @@
       clp = "clear && pfetch";
       vi = "nvim";
       
-      #DIRECTORY
+      #REPLACEMENT
       ls = "eza --color=always --icons --group-directories-first";
       la = "eza -la --color=always --icons --group-directories-first";
       ll = "eza -l --color=always --icons --group-directories-first";
       lt = "eza -aT --color=always --icons --group-directories-first";
-      #"l." = "eza -a | egrep \"^\.\"";
-  
-      #GREP
-      grep = "grep --color=auto";
-      egrep = "egrep --color=auto";
-      fgrep = "fgrep --color=auto";
+      # "l." = "eza -a | egrep \"^\.\"";
+      cat = "bat";
       
       #CONFIRM BEFORE OVERWRITING SOMETHING
       cp = "cp -i";
