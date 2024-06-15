@@ -54,6 +54,9 @@ end
 -- Keep cursor centered
 map('n', 'n', 'nzzzv', opts)
 map('n', 'N', 'Nzzzv', opts)
+map('n', 'j', 'jzz', opts)
+map('n', 'k', 'kzz', opts)
+map('n', 'G', 'Gzz', opts)
 
 -- Insert line
 map('n', '<CR>', 'mzo<Esc>`z', opts)

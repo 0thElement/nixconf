@@ -2,14 +2,13 @@
 {
   home.packages = with pkgs; [
     gnome.nautilus
+    nwg-look
   ];
 
   gtk = {
     enable = true;
     font.name = "Noto Sans";
     font.package = pkgs.noto-fonts;
-    # theme.name = "adw-gtk3-dark";
-    # theme.package = pkgs.adw-gtk3;
     theme.name = "Dracula";
     theme.package = pkgs.dracula-theme;
     iconTheme.name = "Papirus-Dark-Maia";
@@ -18,14 +17,20 @@
       gtk-application-prefer-dark-theme = true;
       gtk-key-theme-name    = "Default";
       gtk-icon-theme-name   = "Papirus-Dark-Maia";
-      gtk-cursor-theme-name = "Catppuccin-Macchiato-Dark-Cursors";
+      gtk-cursor-theme-name = "Capitaine Cursors - White";
     };
+  };
+
+  home.file.".icons/default".source = "${pkgs.capitaine-cursors}/share/icons/capitaine-cursors-white";
+  home.sessionVariables = {
+    XCURSOR_SIZE = 16;
+    XCURSOR_THEME = "Capitaine Cursors - White";
   };
 
   dconf.settings = {
     "org/gnome/desktop/interface" = {
       gtk-key-theme = "Default";
-      cursor-theme = "Catppuccin-Macchiato-Dark-Cursors";
+      cursor-theme = "Capitaine Cursors - White";
     };
   };
 
@@ -34,10 +39,12 @@
     "${pkgs.gsettings-desktop-schemas}/share/gsettings-schemas/${pkgs.gsettings-desktop-schemas.name}"
   ];
 
-  home.pointerCursor = {
-    gtk.enable = true;
-    name = "Catppuccin-Macchiato-Dark-Cursors";
-    package = pkgs.catppuccin-cursors.macchiatoDark;
-    size = 16;
-  };
+  # home.pointerCursor = 
+  # {
+  #   gtk.enable = true;
+  #   x11.enable = true;
+  #   name = "Capitaine Cursors - White";
+  #   package = pkgs.capitaine-cursors;
+  #   size = 16;
+  # };
 }
