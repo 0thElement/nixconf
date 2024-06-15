@@ -4,6 +4,10 @@
   home.file.".config/nvim/cmp.lua".source = ./cmp.lua;
 
   home.packages = with pkgs; [ nil ripgrep fzf ];
+
+  home.sessionVariables = {
+    EDITOR = "nvim";
+  };
         
   programs.neovim = {
     enable = true;
@@ -13,7 +17,25 @@
       plenary-nvim
 
       # Aesthetic
-      vim-airline
+      lualine-lsp-progress
+      {
+        plugin = lualine-nvim;
+        config = ''
+          lua << EOF
+          require('lualine').setup({
+            theme = 'powerline-dark',
+            sections = {
+              lualine_a = {'mode'},
+              lualine_b = {'branch', 'diff', 'diagnostics'},
+              lualine_c = {'filename'},
+              lualine_x = {'lsp_progress', 'encoding'},
+              lualine_y = {'filetype'},
+              lualine_z = {'progress'}
+            },
+          })
+          EOF
+        '';
+      }
       vim-gitgutter
       {
         plugin = catppuccin-nvim;
@@ -24,7 +46,7 @@
             color_overrides = {
               frappe = {
                 base = "#292a37",
-                mantle = "#3f4054",
+                mantle = "#292a37",
                 crust = "#292a37",
               }
             }
@@ -41,9 +63,14 @@
         plugin = indent-blankline-nvim;
         config = "lua require('ibl').setup()";
       }
+      {
+        plugin = nvim-scrollview;
+        config = "lua require('scrollview').setup()";
+      }
 
       # Navigation
-      { plugin = oil-nvim;
+      {
+        plugin = oil-nvim;
         config = ''
           lua << EOF
           require('oil').setup({
@@ -89,10 +116,32 @@
       # LSP
       {
         plugin = nvim-lspconfig;
-        config = "lua require('lspconfig').nil_ls.setup({})";
-      }
-      {
-        plugin = rustaceanvim;
+        config = ''
+          lua << EOF
+          -- vim.cmd [[autocmd! ColorScheme * highlight NormalFloat guibg=#1f2335]]
+          -- vim.cmd [[autocmd! ColorScheme * highlight FloatBorder guifg=white guibg=#1f2335]]
+
+          local border = {
+            {"╭", "FloatBorder"},
+            {"─", "FloatBorder"},
+            {"╮", "FloatBorder"},
+            {"│", "FloatBorder"},
+            {"╯", "FloatBorder"},
+            {"─", "FloatBorder"},
+            {"╰", "FloatBorder"},
+            {"│", "FloatBorder"},
+          }
+
+          local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
+          function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
+            opts = opts or {}
+            opts.border = opts.border or border
+            return orig_util_open_floating_preview(contents, syntax, opts, ...)
+          end
+
+          require('lspconfig').nil_ls.setup({})
+          EOF
+        '';
       }
       {
         plugin = lsp_signature-nvim;
@@ -100,14 +149,33 @@
       }
       { 
         plugin = renamer-nvim;
-        config = "lua require('renamer').setup({})";
+        config = ''
+          lua require('renamer').setup({ min_width = 20, padding = { left = 1, right = 1 } })
+          hi link RenamerBorder FloatBorder
+          hi link RenamerTitle FloatBorder
+        '';
       } 
-      luasnip nvim-cmp cmp-buffer cmp-nvim-lsp cmp-path
+      lspkind-nvim
+      rustaceanvim
+      luasnip
+      nvim-cmp cmp-buffer cmp-nvim-lsp cmp-path cmp-calc
 
       # Code actions
       {
         plugin = nvim-lightbulb;
-        config = "lua require('nvim-lightbulb').setup({autocmd={enabled=true}})";
+        config = ''
+          lua << EOF
+          require('nvim-lightbulb').setup({
+            autocmd = { enabled = true },
+            sign = { enabled = false },
+            virtual_text = {
+              enabled = true,
+              pos = "eol",
+              hl = "",
+            }
+          })
+          EOF
+        '';
       }
       {
         plugin = actions-preview-nvim;

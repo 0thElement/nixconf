@@ -36,7 +36,7 @@
 
       function fish_right_prompt
 	set_color '#555555'
-	date '+%H:%M:%S'	
+	date '+⏲ %H:%M:%S'	
 	set_color normal
       end
       funcsave -q fish_greeting

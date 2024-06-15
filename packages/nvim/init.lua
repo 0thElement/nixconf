@@ -26,12 +26,6 @@ map('n', '<C-n>', '<CMD>Telescope live_grep <CR>', opts)
 map('n', '<C-f>', '<CMD>Telescope find_files <CR>', opts)
 map('n', '<C-\\>', '<CMD>ToggleTerm<CR>', opts)
 
--- Buffers
-map('n', '<C-h>', "<C-w>h", opts)
-map('n', '<C-j>', "<C-w>j", opts)
-map('n', '<C-k>', "<C-w>k", opts)
-map('n', '<C-l>', "<C-w>l", opts)
-
 -- Save
 map('n', '<C-s>', ':w<cr>', opts)
 
@@ -88,7 +82,21 @@ vim.keymap.set("n", "<C-9>", function() harpoon:list():select(9) end)
 vim.keymap.set("n", "[[", function() harpoon:list():prev({ui_nav_wrap = true}) end)
 vim.keymap.set("n", "]]", function() harpoon:list():next({ui_nav_wrap = true}) end)
 
-vim.keymap.set("n", "<C-e>", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
+local border = {
+  {"╭", "FloatBorder"},
+  {"─", "FloatBorder"},
+  {"╮", "FloatBorder"},
+  {"│", "FloatBorder"},
+  {"╯", "FloatBorder"},
+  {"─", "FloatBorder"},
+  {"╰", "FloatBorder"},
+  {"│", "FloatBorder"},
+}
+vim.keymap.set("n", "<C-e>", function() harpoon.ui:toggle_quick_menu(harpoon:list(), {
+    border = border,
+    title = {{" Harpoon ", "FloatBorder"}},
+    title_pos = "center",
+}) end)
 
 vim.api.nvim_set_keymap('n', '<F2>', '<cmd>lua require("renamer").rename()<cr>', opts)
 

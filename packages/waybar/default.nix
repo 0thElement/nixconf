@@ -266,7 +266,6 @@
       spacing = 0;
       gtk-layer-shell = true;
       modules-left = [
-        "custom/notification"
         "pulseaudio#audio"
         "network#wlo1"
         "network#eno1"
@@ -274,26 +273,6 @@
         "tray"
         "hyprland/workspaces"
       ];
-      "custom/notification" = {
-        tooltip = false;
-        format = "{icon}";
-        format-icons = {
-          notification = "󱅫";
-          none = "󰂚";
-          dnd-notification = "󰂛";
-          dnd-none = "󰂛";
-          inhibited-notification = "󱅫";
-          inhibited-none = "󰂚";
-          dnd-inhibited-notification = "󰂛";
-          dnd-inhibited-none = "󰂛";
-        };
-        return-type = "json";
-        exec-if = "which swaync-client";
-        exec = "swaync-client -swb";
-        on-click = "swaync-client -t -sw";
-        on-click-right = "swaync-client -d -sw";
-        escape = true;
-      };
       clock = {
         interval = 1;
         tooltip = true;
@@ -322,39 +301,9 @@
         };
         on-click = "activate";
       };
-      "hyprland/submap" = {
-        format = "{}";
-        tooltip = false;
-      };
-      "hyprland/window" = {
-        format = " <span font_desc='Iosevka Raven 12'>{:.40}</span> ";
-        separate-outputs = false;
-      };
-      "sway/workspaces" = {
-        format = "{icon}";
-        format-icons = {
-          "1" = "1";
-          "2" = "2";
-          "3" = "3";
-          "4" = "4";
-          "5" = "5";
-          "6" = "6";
-          "7" = "7";
-          "8" = "8";
-          "9" = "9";
-          "default" = "1";
-        };
-        on-click = "activate";
-      };
-      "sway/mode" = {
-        format = "{}";
-        tooltip = false;
-      };
       modules-right = [
         "cpu"
         "memory"
-        # "backlight"
-        # "pulseaudio#microphone"
         "battery"
         "clock"
       ];
@@ -371,17 +320,6 @@
         format = "󰍛 {percentage}";
         on-click = "";
         tooltip = false;
-      };
-      backlight = {
-        format = "{icon}";
-        format-icons = [
-          "󰃟"
-        ];
-        on-scroll-up = "brightnessctl set +5%";
-        on-scroll-down = "brightnessctl set 5%-";
-        on-click = "";
-        tooltip = false;
-        tooltip-format = "{percent}%";
       };
       "pulseaudio#audio" = {
         format = "{icon}";
@@ -406,16 +344,6 @@
         on-scroll-down = "pactl set-sink-volume @DEFAULT_SINK@ -1%";
         tooltip = true;
         tooltip-format = "{icon} {desc} {volume}%";
-      };
-      "pulseaudio#microphone" = {
-        format = "{format_source}";
-        format-source = "󰍬 {volume}%";
-        format-source-muted = "󰍭 {volume}%";
-        on-click = "pactl set-source-mute @DEFAULT_SOURCE@ toggle";
-        on-scroll-up = "pactl set-source-volume @DEFAULT_SOURCE@ +1%";
-        on-scroll-down = "pactl set-source-volume @DEFAULT_SOURCE@ -1%";
-        max-volume = 100;
-        tooltip = false;
       };
       "network#wlo1" = {
         interval = 1;

@@ -1,6 +1,4 @@
-
 { pkgs, inputs, ... }:
-
 {
   imports = [
     inputs.home-manager.nixosModules.default
@@ -80,7 +78,7 @@
     extraGroups = [ "networkmanager" "wheel" "docker" ];
     shell = pkgs.fish;
     uid = 1000;
-    packages = with pkgs; [];
+    packages = [];
   };
 
   home-manager = {
@@ -118,6 +116,7 @@
       noto-fonts-cjk
       twitter-color-emoji
       font-awesome
+      powerline-fonts
       (nerdfonts.override { fonts = [ "NerdFontsSymbolsOnly" ]; })
     ];
     fontconfig = {
@@ -154,13 +153,6 @@
               held: Ctrl_R
               alone: Esc
               alone_timeout: 500
-      keymap:
-        - name: RightAlt+hjkl to Arrows
-          remap:
-            Alt_R-h: Left
-            Alt_R-l: Right
-            Alt_R-j: Down
-            Alt_R-k: Up
     '';
   };
 

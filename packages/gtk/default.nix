@@ -5,6 +5,14 @@
     nwg-look
   ];
 
+  xdg.mime.enable = false;
+  xdg.mimeApps = {
+    enable = true;
+    defaultApplications = {
+      "inode/directory" = ["org.gnome.Nautilus.desktop"];
+    };
+  };
+
   gtk = {
     enable = true;
     font.name = "Noto Sans";
@@ -38,13 +46,4 @@
     "${pkgs.gtk3}/share/gsettings-schemas/${pkgs.gtk3.name}"
     "${pkgs.gsettings-desktop-schemas}/share/gsettings-schemas/${pkgs.gsettings-desktop-schemas.name}"
   ];
-
-  # home.pointerCursor = 
-  # {
-  #   gtk.enable = true;
-  #   x11.enable = true;
-  #   name = "Capitaine Cursors - White";
-  #   package = pkgs.capitaine-cursors;
-  #   size = 16;
-  # };
 }
