@@ -1,4 +1,4 @@
-{ pkgs, inputs, ... }:
+{ pkgs, pkgsNvim, inputs, ... }:
 {
   imports = [
     inputs.home-manager.nixosModules.default
@@ -82,7 +82,7 @@
   };
 
   home-manager = {
-    extraSpecialArgs = { inherit inputs; };
+    extraSpecialArgs = { inherit inputs; inherit pkgsNvim; };
     users = {
       "zeroth" = import ./home.nix;
     };

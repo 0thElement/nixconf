@@ -1,4 +1,4 @@
-{  pkgs, ... }:
+{  pkgs, pkgsNvim, ... }:
 {
   home.file.".config/nvim/settings.lua".source = ./init.lua;
   home.file.".config/nvim/cmp.lua".source = ./cmp.lua;
@@ -11,7 +11,7 @@
         
   programs.neovim = {
     enable = true;
-    plugins = with pkgs.vimPlugins; [ 
+    plugins = with pkgsNvim.vimPlugins; [ 
       # Idk
       vim-nix
       plenary-nvim
