@@ -70,7 +70,18 @@
 
       # Navigation
       {
-        plugin = oil-nvim;
+        plugin = pkgs.vimUtils.buildVimPlugin {
+          pname = "oil.nvim";
+          version = "2024-06-10";
+          src = pkgs.fetchFromGitHub {
+            owner = "stevearc";
+            repo = "oil.nvim";
+            rev = "6724f7e94d28a53ee87ab93885d688c0ce08929f";
+            hash = "sha256-TH1/07TpgHUwsAQKokiIMd1QiD2C7ySlyuJRPBpKlzY=";
+            fetchSubmodules = true;
+          };
+          meta.homepage = "https://github.com/stevearc/oil.nvim/";
+        };
         config = ''
           lua << EOF
           require('oil').setup({

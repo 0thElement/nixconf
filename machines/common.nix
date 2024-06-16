@@ -94,7 +94,6 @@
 
   environment.systemPackages = with pkgs; [
     vim
-    neovim
     wget
     docker-compose
     steam-run
