@@ -10,6 +10,7 @@
     ./nvim
     ./git
     ./firefox
+    ./tmux
     ./syncthing
     ./extra
   ];

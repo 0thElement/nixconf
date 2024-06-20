@@ -15,6 +15,11 @@
     enableFishIntegration = true;
   };
 
+  programs.direnv = {
+    enable = true;
+    nix-direnv.enable = true;
+  };
+
   home.sessionVariables = {
     PF_INFO = "ascii title os host kernel uptime memory";
     PF_CUSTOM_LOGOS = /home/zeroth/.config/pfetch_logos.sh;

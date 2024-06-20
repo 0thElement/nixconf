@@ -17,8 +17,6 @@
     btop
     # Dev
     dotnet-sdk
-    jdk
-    rustup nodejs
     # Misc
     vesktop
     xwaylandvideobridge
