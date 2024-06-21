@@ -3,7 +3,14 @@
   home.file.".config/nvim/settings.lua".source = ./init.lua;
   home.file.".config/nvim/cmp.lua".source = ./cmp.lua;
 
-  home.packages = with pkgs; [ nil ripgrep fzf ];
+  home.packages = with pkgs; [
+    nil
+    ripgrep
+    fzf
+    nodejs
+    nodePackages.typescript
+    nodePackages.typescript-language-server
+  ];
 
   home.sessionVariables = {
     EDITOR = "nvim";
@@ -151,6 +158,7 @@
           end
 
           require('lspconfig').nil_ls.setup({})
+          require('lspconfig').tsserver.setup({})
           EOF
         '';
       }

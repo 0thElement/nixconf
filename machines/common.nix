@@ -44,6 +44,7 @@
 
   services.blueman.enable = true;
   services.flatpak.enable = true;
+  services.upower.enable = true;
 
   environment.sessionVariables = {
     WLR_HARDWARE_CURSORS = "1";

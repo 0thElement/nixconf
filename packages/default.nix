@@ -1,9 +1,9 @@
 { ... }:
 {
   imports = [
+    ./ags
     ./alacritty
     ./hyprland
-    ./waybar
     ./gtk
     ./fish
     ./rofi

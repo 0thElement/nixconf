@@ -11,6 +11,7 @@
 
     xremap-flake.url = "github:xremap/nix-flake";
     nixpkgsNvim.url = "github:nixos/nixpkgs/57d6973abba7ea108bac64ae7629e7431e0199b6";
+    ags.url = "github:Aylur/ags";
   };
 
   outputs = { self, nixpkgs, nixpkgsNvim, ... }@inputs:

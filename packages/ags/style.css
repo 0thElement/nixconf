@@ -1,0 +1,101 @@
+@define-color white      #d9e0ee;
+@define-color black      #292a37;
+@define-color text       #d9e0ee;
+@define-color lightgray  #a1a1a1;
+@define-color darkgray   #393a4d;
+@define-color red        #ec6a88;
+@define-color purpfull   #ca9ee6;
+@define-color purp       rgba(176, 114, 209,0.6);
+
+@define-color black-transparent-6 rgba(41, 42, 55, 0.6);
+
+* {
+    all: unset;
+    font-family: "Source Code Pro", "Material Design Icons Desktop";
+    font-size: 14px;
+    color: @text;
+}
+
+window.bar {
+    color: @theme_fg_color;
+}
+
+.workspaces {
+    padding-top: 10px;
+}
+
+.workspaces button {
+    min-width: 44px;
+    margin-bottom: 6px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-radius: 8px;
+    background-color: @transparent;
+    color: @white;
+    transition: all 0.3s ease;
+}
+
+.workspaces button.focused {
+    background-color: @purp;
+    color: @white;
+    transition: all 0s ease;
+}
+
+.workspaces button.focused:hover {
+    background-color: @purp;
+    color: @white;
+    transition: all 0s ease;
+}
+
+.workspaces button:hover {
+    background-color: @black-transparent-6;
+    color: @white;
+}
+
+.workspaces button.urgent {
+    background-color: @red;
+    color: @black;
+}
+
+.notification {
+    color: yellow;
+}
+
+.sysicon {
+    margin-top: 5px;
+}
+
+.tray {
+    border-bottom: 1px;
+    border-color: @darkgray;
+    border-style: solid;
+    padding-bottom: 12px
+}
+
+.trayicon {
+    margin-top: 12px;
+}
+
+.wifiLabel {
+    font-size: 10px;
+}
+
+label.time {
+    color: @purpfull;
+    font-size: 20px;
+    font-family: "Noto Sans";
+    font-weight: bold;
+}
+
+label.date {
+    color: @lightgray;
+    font-size: 11px;
+}
+
+.circular {
+    background-color: @darkgray;
+    color: @purpfull;
+    font-size: 4px;
+    min-width: 30px;
+    min-height: 30px;
+}
