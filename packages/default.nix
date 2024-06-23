@@ -8,6 +8,7 @@
     ./fish
     ./rofi
     ./nvim
+    ./pywal
     ./git
     ./firefox
     ./tmux

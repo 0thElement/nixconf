@@ -7,6 +7,8 @@
     nil
     ripgrep
     fzf
+    nodejs
+    nodePackages.typescript-language-server
   ];
 
   home.sessionVariables = {
@@ -24,7 +26,8 @@
       lualine-lsp-progress
       {
         plugin = lualine-nvim;
-        config = '' lua << EOF
+        config = ''
+          lua << EOF
           require('lualine').setup({
             theme = 'powerline-dark',
             sections = {

@@ -2,7 +2,6 @@
 {
   home.packages = with pkgs; [
     hyprland
-    hyprpaper
     grim
     slurp
     swappy
@@ -11,6 +10,9 @@
     pulseaudio
   ];
 
+  home.sessionVariables = {
+    LAST_WALLPAPER_PATH = "/home/zeroth/.local/state/lastwallpaper";
+  };
+
   home.file.".config/hypr/hyprland.conf".source = ./hyprland.conf;
-  home.file.".config/hypr/hyprpaper.conf".source = ./hyprpaper.conf;
 }

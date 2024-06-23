@@ -22,8 +22,7 @@
     xwaylandvideobridge
   ];
 
-  home.sessionPath = [ "/home/zeroth/.cargo/bin/" ];
-  home.file."home/zeroth/.config/xdg-desktop-portal/hyprland-portals.conf".text = ''
+  home.file."config/xdg-desktop-portal/hyprland-portals.conf".text = ''
     [preferred]
     default=hyprland;gtk
     org.free.impl.portal.FileChooser=kde

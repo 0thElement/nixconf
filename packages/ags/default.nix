@@ -15,8 +15,8 @@
     ];
   };
 
-  home.file."/home/zeroth/.config/ags/config.js".source = ./config.js;
-  home.file."/home/zeroth/.config/ags/style.css".source = ./style.css;
-  home.file."/home/zeroth/.config/ags/cpu.sh".source = ./cpu.sh;
-  home.file."/home/zeroth/.config/ags/mem.sh".source = ./mem.sh;
+  # home.file."/home/zeroth/.config/ags/config.js".source = ./config.js;
+  # home.file."/home/zeroth/.config/ags/style.css".source = ./style.css;
+  # home.file."/home/zeroth/.config/ags/cpu.sh".source = ./cpu.sh;
+  # home.file."/home/zeroth/.config/ags/mem.sh".source = ./mem.sh;
 }
