@@ -59,8 +59,6 @@ cmp.setup({
         end,
     },
     mapping = cmp.mapping.preset.insert({
-        ['<C-k>'] = cmp.mapping.scroll_docs(-4),
-        ['<C-j>'] = cmp.mapping.scroll_docs(4),
         ['<CR>'] = cmp.mapping.confirm({ select = true }),
         ["<Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
@@ -83,7 +81,7 @@ cmp.setup({
     }),
 
     formatting = {
-        fields = { 'abbr', 'kind', 'menu' },
+        fields = { 'abbr', 'kind' },
         format = function(entry, vim_item)
             before = function (entry, vim_item)
                 vim_item.menu = ({
@@ -93,12 +91,12 @@ cmp.setup({
                     path = '[Path]',
                     calc = '[Calc]',
                 })[entry.source.name]
-                return vim_item
-            end
 
-            if custom_menu_icon[entry.source.name] then
-                vim_item.kind = custom_menu_icon[entry.source.name]
-                return before(entry, vim_item)
+                if custom_menu_icon[entry.source.name] then
+                    vim_item.kind = custom_menu_icon[entry.source.name]
+                end
+
+                return vim_item
             end
 
             return lspkind.cmp_format({

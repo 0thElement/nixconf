@@ -22,12 +22,21 @@ g.mapleader = ' '
 
 -- Navigation
 map("n", "-", "<CMD>Oil --float<CR>", opts)
-map('n', '<C-n>', '<CMD>Telescope live_grep <CR>', opts)
-map('n', '<C-f>', '<CMD>Telescope find_files <CR>', opts)
-map('n', '<C-\\>', '<CMD>ToggleTerm<CR>', opts)
+map('n', '<C-n>', 'mP<CMD>Telescope live_grep <CR>', opts)
+map('n', '<C-f>', 'mP<CMD>Telescope find_files <CR>', opts)
+map('n', '<C-n>', 'mP<CMD>Telescope live_grep <CR>', opts)
+map('n', '<c-m>', 'mP<CMD>Trouble diagnostics open focus=1<CR>', opts)
+
+-- Terminal
+map('n', '<C-\\>', '<CMD>FloatermToggle<CR>', opts)
+map('t', '<C-\\>', '<CMD>FloatermToggle<CR>', opts)
+map('t', '<C-]>', '<CMD>FloatermNext<CR>', opts)
+map('t', '<C-[>', '<CMD>FloatermPrev<CR>', opts)
+map('t', '<C-S-[>', '<CMD>FloatermKill<CR><CMD>silent FloatermShow<CR>', opts)
+map('t', "<C-S-]>", '<CMD>FloatermNew<CR>', opts)
 
 -- Save
-map('n', '<C-s>', ':w<cr>', opts)
+map('n', '<C-s>', '<CMD>silent lua vim.lsp.buf.format()<CR>:w<cr>', opts)
 
 -- Clear search
 map('n', '<C-X>', '<CMD>:noh<CR>', opts)
@@ -57,10 +66,6 @@ map('n', '<CR>', 'mzo<Esc>`z', opts)
 map('n', '<C-CR>', 'i<CR><Esc>k$', opts)
 map('n', 'J', 'mzJ`z', opts)
 
--- Go to beginning or end of line
-map('n', 'H', '^', opts)
-map('n', 'L', '$', opts)
-
 -- Tab
 vim.keymap.set('v', '<', '<gv', opts)
 vim.keymap.set('v', '>', '>gv', opts) 
@@ -69,18 +74,9 @@ vim.keymap.set('v', '>', '>gv', opts)
 local harpoon = require('harpoon')
 vim.keymap.set("n", "=", function() harpoon:list():add() end)
 
-vim.keymap.set("n", "11", function() harpoon:list():select(1) end)
-vim.keymap.set("n", "22", function() harpoon:list():select(2) end)
-vim.keymap.set("n", "33", function() harpoon:list():select(3) end)
-vim.keymap.set("n", "44", function() harpoon:list():select(4) end)
-vim.keymap.set("n", "55", function() harpoon:list():select(5) end)
-vim.keymap.set("n", "66", function() harpoon:list():select(6) end)
-vim.keymap.set("n", "77", function() harpoon:list():select(7) end)
-vim.keymap.set("n", "88", function() harpoon:list():select(8) end)
-vim.keymap.set("n", "99", function() harpoon:list():select(9) end)
-
-vim.keymap.set("n", "[[", function() harpoon:list():prev({ui_nav_wrap = true}) end)
-vim.keymap.set("n", "]]", function() harpoon:list():next({ui_nav_wrap = true}) end)
+for n = 1, 9 do
+    vim.keymap.set("n", ""..n..n, "mP<cmd>lua require('harpoon'):list():select("..n..")<cr>")
+end
 
 local border = {
   {"╭", "FloatBorder"},
@@ -107,8 +103,19 @@ map('v', '<C-/>', ":'<,'>Commentary<CR>", opts)
 -- Others
 require('nvim-autopairs').setup()
 vim.keymap.set({'v', 'n'}, '<C-.>', require("actions-preview").code_actions)
-vim.keymap.set('n','gD','<cmd>lua vim.lsp.buf.declaration()<CR>')
-vim.keymap.set('n','gd','<cmd>lua vim.lsp.buf.definition()<CR>')
+vim.keymap.set('n','gD','mP<cmd>lua vim.lsp.buf.declaration()<CR>')
+vim.keymap.set('n','gd','mP<cmd>lua vim.lsp.buf.definition()<CR>')
+vim.keymap.set('n','gt','mP<cmd>lua vim.lsp.buf.type_definition()<CR>')
+vim.keymap.set('n','gr',"mP<cmd>lua require('telescope.builtin').lsp_references()<CR>")
+vim.keymap.set('n','L','<cmd>lua vim.diagnostic.open_float()<CR>')
+vim.keymap.set('n','S','<cmd>lua vim.lsp.buf.signature_help()<CR>')
+vim.keymap.del('n','<c-W>d')
+vim.keymap.set('n','K', vim.lsp.buf.hover)
+vim.keymap.set('n','[d','mP<cmd>lua vim.diagnostic.goto_next()<cr>')
+vim.keymap.set('n',']d','mP<cmd>lua vim.diagnostic.goto_prev()<cr>')
+
+-- Go back
+vim.keymap.set('n', '<Backspace>', "'P", opts);
 
 -- OPTIONS --
 -- Performance

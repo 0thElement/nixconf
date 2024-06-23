@@ -5,23 +5,26 @@
     inputs.xremap-flake.nixosModules.default
   ];
 
+  # NixOS settings
   nix = {
     settings.auto-optimise-store = true;
-    settings.experimental-features = [ "nix-command" "flakes" ];
-    gc = {
+    settings.experimental-features = [ "nix-command" "flakes" ]; gc = {
       automatic = true;
       dates = "weekly";
       options = "--delete-older-than 7d";
     };
   };
 
+  # Boot settings
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  # Networking
   networking.hostName = "nixos";
   networking.networkmanager.enable = true;
-  time.timeZone = "Asia/Bangkok";
 
+  # Timezone, locale & input
+  time.timeZone = "Asia/Bangkok";
   i18n.defaultLocale = "ja_JP.UTF-8";
   i18n.extraLocaleSettings = {
     LC_ADDRESS = "ja_JP.UTF-8";
@@ -37,14 +40,20 @@
   i18n.inputMethod.enabled = "fcitx5";
   i18n.inputMethod.fcitx5.addons = with pkgs; [ fcitx5-mozc fcitx5-unikey ];
 
+  # Services
   services.xserver = {
     enable = true;
     xkb.layout = "us";
   };
-
-  services.blueman.enable = true;
+  # Bluetooth
+  services.blueman.enable = true; 
+  # Flatpak for unity
   services.flatpak.enable = true;
+  # Battery status
   services.upower.enable = true;
+  # USB
+  services.gvfs.enable = true;
+  services.udisks2.enable = true;
 
   environment.sessionVariables = {
     WLR_HARDWARE_CURSORS = "1";
@@ -52,27 +61,13 @@
     NIXOS_CONFIG = "/home/zeroth/nixconf/";
   };
 
-  programs.hyprland = {
-    enable = true;
-    xwayland.enable = true;
-  };
-
   disabledModules = [ "services/programs/man.nix" ];
   documentation.man.enable = false;
 
-  hardware = {
-    bluetooth = {
-      enable = true;
-      powerOnBoot = true;
-      settings = {
-        General.Experimental = true;
-      };
-    };
-    opengl.enable = true;
-    nvidia.modesetting.enable = true;
-  };
-
+  # Shell
   programs.fish.enable = true;
+
+  # User & home
   users.users.zeroth = {
     isNormalUser = true;
     description = "0thElement";
@@ -82,17 +77,18 @@
     packages = [];
   };
 
+  services.getty.autologinUser = "zeroth";
+
   home-manager = {
-    extraSpecialArgs = { inherit inputs; inherit pkgsNvim; };
+    extraSpecialArgs = { inherit inputs pkgsNvim; };
     users = {
       "zeroth" = import ./home.nix;
     };
   };
-
-  services.getty.autologinUser = "zeroth";
-  nixpkgs.config.allowUnfree = true;
   virtualisation.docker.enable = true;
 
+  # Packages
+  nixpkgs.config.allowUnfree = true;
   environment.systemPackages = with pkgs; [
     vim
     wget
@@ -109,6 +105,7 @@
     dedicatedServer.openFirewall = true;
   };
 
+  # Fonts
   fonts = {
     packages = with pkgs; [
       source-code-pro
@@ -122,6 +119,12 @@
     fontconfig = {
       hinting.autohint = true;
     };
+  };
+
+  # Desktop
+  programs.hyprland = {
+    enable = true;
+    xwayland.enable = true;
   };
 
   xdg.portal = {
@@ -140,6 +143,19 @@
     alsa.support32Bit = true;
     pulse.enable = true;
     jack.enable = true;
+  };
+
+  # Hardware
+  hardware = {
+    bluetooth = {
+      enable = true;
+      powerOnBoot = true;
+      settings = {
+        General.Experimental = true;
+      };
+    };
+    opengl.enable = true;
+    nvidia.modesetting.enable = true;
   };
 
   services.xremap = {

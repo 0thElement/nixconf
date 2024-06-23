@@ -2,6 +2,8 @@
 {
   imports = [ inputs.ags.homeManagerModules.default ];
 
+  home.packages = [ pkgs.networkmanagerapplet ];
+
   programs.ags = {
     enable = true;
 

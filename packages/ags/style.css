@@ -76,10 +76,6 @@ window.bar {
     margin-top: 12px;
 }
 
-.wifiLabel {
-    font-size: 10px;
-}
-
 label.time {
     color: @purpfull;
     font-size: 20px;

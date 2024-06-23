@@ -1,5 +1,5 @@
 const hyprland = await Service.import("hyprland")
-const notifications = await Service.import("notifications")
+// const notifications = await Service.import("notifications")
 const audio = await Service.import("audio")
 const battery = await Service.import("battery")
 const systemtray = await Service.import("systemtray")
@@ -69,7 +69,7 @@ function Bottom() {
             Network(),
             Time(),
             Date(),
-            Notification(),
+            // Notification(),
         ],
     })
 }
@@ -106,21 +106,21 @@ function Date() {
     })
 }
 
-function Notification() {
-    const popups = notifications.bind("popups")
-    return Widget.Box({
-        class_name: "notification",
-        visible: popups.as(p => p.length > 0),
-        children: [
-            Widget.Icon({
-                icon: "preferences-system-notifications-symbolic",
-            }),
-            Widget.Label({
-                label: popups.as(p => p[0]?.summary || ""),
-            }),
-        ],
-    })
-}
+// function Notification() {
+//     const popups = notifications.bind("popups")
+//     return Widget.Box({
+//         class_name: "notification",
+//         visible: popups.as(p => p.length > 0),
+//         children: [
+//             Widget.Icon({
+//                 icon: "preferences-system-notifications-symbolic",
+//             }),
+//             Widget.Label({
+//                 label: popups.as(p => p[0]?.summary || ""),
+//             }),
+//         ],
+//     })
+// }
 
 function Volume() {
     const icons = {
@@ -241,18 +241,8 @@ function Bluetooth() {
 
 function WifiIndicator() 
 {
-    return Widget.Box({
-        vertical: true,
-        children: [
-            Widget.Icon({
-                icon: network.wifi.bind('icon_name'),
-            }),
-            Widget.Label({
-                class_name: "wifiLabel",
-                label: network.wifi.bind('ssid')
-                    .as(ssid => ssid || 'Unknown'),
-            }),
-        ],
+    return Widget.Icon({
+        icon: network.wifi.bind('icon_name'),
     })
 }
 
@@ -276,7 +266,7 @@ function Network() {
                     },
                     shown: network.bind('primary').as(p => p || 'wifi'),
                 }),
-                on_primary_click: (_, __) => Utils.subprocess(['blueman-manager'])
+                on_primary_click: (_, __) => Utils.subprocess(['nm-connection-editor'])
             })
         ],
     })

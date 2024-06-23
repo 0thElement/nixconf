@@ -7,9 +7,6 @@
     nil
     ripgrep
     fzf
-    nodejs
-    nodePackages.typescript
-    nodePackages.typescript-language-server
   ];
 
   home.sessionVariables = {
@@ -27,8 +24,7 @@
       lualine-lsp-progress
       {
         plugin = lualine-nvim;
-        config = ''
-          lua << EOF
+        config = '' lua << EOF
           require('lualine').setup({
             theme = 'powerline-dark',
             sections = {
@@ -114,23 +110,16 @@
         config = "lua require('harpoon').setup()";
       }
       {
-        plugin = toggleterm-nvim;
+        plugin = vim-floaterm;
         config = ''
-          lua << EOF
-          require('toggleterm').setup({
-            direction = 'float',
-          })
-          EOF
+            let g:floaterm_borderchars = "─│─│╭╮╯╰"
+            let g:floaterm_titleposition = "center"
+            let g:floaterm_width = 0.99
+            let g:floaterm_height = 0.95
+            let g:floaterm_title = " Terminal $1/$2 "
+            hi link FloatermBorder FloatBorder
         '';
       }
-
-      # Buffer navigation
-      vim-repeat
-      {
-        plugin = leap-nvim;
-        config = "lua require('leap').create_default_mappings()";
-      }
-
       # LSP
       {
         plugin = nvim-lspconfig;
@@ -172,6 +161,22 @@
           lua require('renamer').setup({ min_width = 20, padding = { left = 1, right = 1 } })
           hi link RenamerBorder FloatBorder
           hi link RenamerTitle FloatBorder
+        '';
+      } 
+      { 
+        plugin = trouble-nvim;
+        config = ''
+          lua << EOF
+          require('trouble').setup({
+            preview = {
+              type = "split",
+              relative = "win",
+              position = "right",
+              size = 0.3,
+            },
+          })
+          EOF
+          hi WinSeparator guifg=#8caaee
         '';
       } 
       lspkind-nvim
@@ -220,6 +225,7 @@
       }
 
       # Tools
+      vim-repeat
       vim-commentary 
       vim-surround
       nvim-autopairs
