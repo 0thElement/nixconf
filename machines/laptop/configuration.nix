@@ -5,5 +5,5 @@
     ../common.nix ];
 
   # Do not change this, future me
-  system.stateVersion = "23.11";
+  config.system.stateVersion = "23.11";
 }

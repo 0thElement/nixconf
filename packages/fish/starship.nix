@@ -42,7 +42,7 @@
       time = {
         disabled = false;
         format = "[$time]($style)";
-	style = "fg:#555555";
+        style = "fg:#555555";
         time_format = "%T";
       };
         

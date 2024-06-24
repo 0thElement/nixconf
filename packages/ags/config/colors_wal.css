@@ -1,0 +1,9 @@
+@define-color white      {color15};
+@define-color black      {color0};
+@define-color lightgray  #a1a1a1;
+@define-color darkgray   {color8};
+@define-color active     {active};
+@define-color activedim  rgba({active.rgb}, 0.6);
+
+@define-color red        #ec6a88;
+@define-color hovered    rgba({color8.rgb}, 0.6);

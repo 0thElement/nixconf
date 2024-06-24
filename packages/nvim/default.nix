@@ -1,7 +1,22 @@
-{  pkgs, pkgsNvim, ... }:
+{  pkgs, pkgsNvim, config, lib, ... }:
 {
-  home.file.".config/nvim/settings.lua".source = ./init.lua;
-  home.file.".config/nvim/cmp.lua".source = ./cmp.lua;
+  home.file =
+    let wal = config.wal.enable; in 
+    lib.mkMerge [
+      {
+        ".config/nvim/settings.lua".source = ./init.lua;
+        ".config/nvim/cmp.lua".source = ./cmp.lua;
+      }
+      (if wal then {
+        ".config/wpg/templates/nvim.lua.base".source = ./colors_wal.lua;
+        ".config/nvim/colors.lua".source =
+          config.lib.file.mkOutOfStoreSymlink
+          "/home/zeroth/.config/wpg/templates/nvim.lua";
+      }
+      else {
+        ".config/nvim/colors.lua".source = ./colors_default.lua;
+      })
+  ];
 
   home.packages = with pkgs; [
     nil
@@ -43,24 +58,7 @@
         '';
       }
       vim-gitgutter
-      {
-        plugin = catppuccin-nvim;
-        config = ''
-          lua << EOF
-          require('catppuccin').setup {
-            flavour = "frappe",
-            color_overrides = {
-              frappe = {
-                base = "#292a37",
-                mantle = "#292a37",
-                crust = "#292a37",
-              }
-            }
-          }
-          EOF
-          colorscheme catppuccin
-        '';
-      }
+      catppuccin-nvim
       {
         plugin = nvim-web-devicons;
         config = "lua require('nvim-web-devicons').setup()";
@@ -245,6 +243,7 @@
     extraConfig = ''
       luafile ~/.config/nvim/settings.lua
       luafile ~/.config/nvim/cmp.lua
+      luafile ~/.config/nvim/colors.lua
     '';
   };
 }

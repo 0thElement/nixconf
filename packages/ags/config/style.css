@@ -1,23 +1,21 @@
-@define-color white      #d9e0ee;
-@define-color black      #292a37;
-@define-color text       #d9e0ee;
-@define-color lightgray  #a1a1a1;
-@define-color darkgray   #393a4d;
-@define-color red        #ec6a88;
-@define-color purpfull   #ca9ee6;
-@define-color purp       rgba(176, 114, 209,0.6);
-
-@define-color black-transparent-6 rgba(41, 42, 55, 0.6);
+@import "./colors.css";
 
 * {
     all: unset;
     font-family: "Source Code Pro", "Material Design Icons Desktop";
     font-size: 14px;
-    color: @text;
+    color: @white;
 }
 
 window.bar {
     color: @theme_fg_color;
+    background-image: linear-gradient(90deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0) 100%);
+}
+
+.container {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 10px;
 }
 
 .workspaces {
@@ -36,19 +34,19 @@ window.bar {
 }
 
 .workspaces button.focused {
-    background-color: @purp;
+    background-color: @activedim;
     color: @white;
     transition: all 0s ease;
 }
 
 .workspaces button.focused:hover {
-    background-color: @purp;
+    background-color: @activedim;
     color: @white;
     transition: all 0s ease;
 }
 
 .workspaces button:hover {
-    background-color: @black-transparent-6;
+    background-color: @hovered;
     color: @white;
 }
 
@@ -77,7 +75,7 @@ window.bar {
 }
 
 label.time {
-    color: @purpfull;
+    color: @active;
     font-size: 20px;
     font-family: "Noto Sans";
     font-weight: bold;
@@ -90,8 +88,33 @@ label.date {
 
 .circular {
     background-color: @darkgray;
-    color: @purpfull;
+    color: @active;
     font-size: 4px;
     min-width: 30px;
     min-height: 30px;
+}
+
+.wallpapers {
+    background-color: transparent;
+    border-radius: 6px;
+}
+
+.wallpaperContainer {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.wallpaperButton {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 10px;
+    margin-right: 10px;
+    border: 2px;
+    border-style: solid;
+    border-color: transparent;
+    transition: all 0.3s ease;
+}
+
+.wallpaperButton:hover {
+    border-color: @active;
 }

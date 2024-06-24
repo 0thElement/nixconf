@@ -1,16 +1,17 @@
-const hyprland = await Service.import("hyprland")
 // const notifications = await Service.import("notifications")
+const hyprland = await Service.import("hyprland")
 const audio = await Service.import("audio")
 const battery = await Service.import("battery")
 const systemtray = await Service.import("systemtray")
 const network = await Service.import("network")
+import { OpenWallpaper, Wallpaper } from "./wallpapers.js"
 
 const mem = Variable(0, {
-    poll: [5000, App.configDir + '/mem.sh' ]
+    poll: [5000, App.configDir + '/mem.sh']
 })
 
 const cpu = Variable(0, {
-    poll: [5000, App.configDir + '/cpu.sh' ]
+    poll: [5000, App.configDir + '/cpu.sh']
 })
 
 const time = Variable("", {
@@ -28,8 +29,9 @@ function Bar(monitor = 0) {
         monitor,
         anchor: ["left", "top", "bottom"],
         exclusivity: "exclusive",
-        margins: [20, 0, 20, 10],
+        margins: [0, 0, 0, 0],
         child: Widget.CenterBox({
+            class_name: "container",
             vertical: true,
             start_widget: Top(),
             end_widget: Bottom(),
@@ -41,6 +43,7 @@ App.config({
     style: "./style.css",
     windows: [
         Bar(),
+        Wallpaper(),
     ],
 })
 
@@ -67,6 +70,7 @@ function Bottom() {
             SysTray(),
             Bluetooth(),
             Network(),
+            OpenWallpaper(),
             Time(),
             Date(),
             // Notification(),
@@ -151,7 +155,8 @@ function Volume() {
                 startAt: 0.75,
                 value: Utils.watch(0, audio.speaker, () => audio.speaker.volume),
                 class_name: "circular",
-                child: icon})
+                child: icon
+            })
         ],
     })
 }
@@ -166,7 +171,8 @@ function Memory() {
                 startAt: 0.75,
                 value: mem.bind().as(x => x / 100),
                 class_name: "circular",
-                child: Widget.Icon({icon: "memory", size: 11})})
+                child: Widget.Icon({ icon: "memory", size: 11 })
+            })
         ],
     })
 }
@@ -181,7 +187,8 @@ function Cpu() {
                 startAt: 0.75,
                 value: cpu.bind().as(x => x / 100),
                 class_name: "circular",
-                child: Widget.Icon({icon: "cpu", size: 10})})
+                child: Widget.Icon({ icon: "cpu", size: 10 })
+            })
         ],
     })
 }
@@ -202,7 +209,9 @@ function Battery() {
                 class_name: "circular",
                 child: Widget.Icon({
                     icon: battery.bind("available").as(x => `${x ? "battery" : "battery-missing"}`),
-                    size: 10})})
+                    size: 10
+                })
+            })
         ],
     })
 }
@@ -239,8 +248,7 @@ function Bluetooth() {
     })
 }
 
-function WifiIndicator() 
-{
+function WifiIndicator() {
     return Widget.Icon({
         icon: network.wifi.bind('icon_name'),
     })

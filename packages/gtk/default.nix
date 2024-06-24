@@ -1,7 +1,7 @@
 { pkgs, ...}:
 {
   home.packages = with pkgs; [
-    gnome.nautilus
+    xfce.thunar
     nwg-look
   ];
 
@@ -10,6 +10,8 @@
     enable = true;
     defaultApplications = {
       "inode/directory" = ["org.gnome.Nautilus.desktop"];
+      "image/png" = ["imv.desktop"];
+      "image/jpeg" = ["imv.desktop"];
     };
   };
 
@@ -17,8 +19,6 @@
     enable = true;
     font.name = "Noto Sans";
     font.package = pkgs.noto-fonts;
-    theme.name = "Dracula";
-    theme.package = pkgs.dracula-theme;
     iconTheme.name = "Papirus-Dark-Maia";
     iconTheme.package = pkgs.papirus-maia-icon-theme;
     gtk3.extraConfig = {
@@ -46,4 +46,9 @@
     "${pkgs.gtk3}/share/gsettings-schemas/${pkgs.gtk3.name}"
     "${pkgs.gsettings-desktop-schemas}/share/gsettings-schemas/${pkgs.gsettings-desktop-schemas.name}"
   ];
+
+  qt = {
+    enable = true;
+    platformTheme.name = "gtk";
+  };
 }

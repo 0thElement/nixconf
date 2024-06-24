@@ -1,66 +1,88 @@
-{ ... }:
-let
-  makeFont = style: { family = "Source Code Pro"; style = style; };
-in
-{
+{ config, ... }:
+let toml = wal: ''
+[colors]
+draw_bold_text_with_bright_colors = true
+
+[colors.bright]
+black = "${ if wal then "0x{color8.strip}" else "0x393a4d" }"
+red = "${ if wal then "0x{color9.strip}" else "0xe95678" }"
+green = "${ if wal then "0x{color10.strip}" else "0x65ebcc" }"
+yellow = "${ if wal then "0x{color11.strip}" else "0xefb993" }"
+blue = "${ if wal then "0x{color12.strip}" else "0x26bbd9" }"
+magenta = "${ if wal then "0x{color13.strip}" else "0xb072d1" }"
+cyan = "${ if wal then "0x{color14.strip}" else "0x59e3e3" }"
+white = "${ if wal then "0x{color15.strip}" else "0xd9e0ee" }"
+
+[colors.normal]
+black = "${ if wal then "0x{color0.strip}" else "0x303241" }"
+red = "${ if wal then "0x{color1.strip}" else "0xec6a88" }"
+green = "${ if wal then "0x{color2.strip}" else "0x3fdaa4" }"
+yellow = "${ if wal then "0x{color3.strip}" else "0xefb993" }"
+blue = "${ if wal then "0x{color4.strip}" else "0x3fc6de" }"
+magenta = "${ if wal then "0x{color5.strip}" else "0xb771dc" }"
+cyan = "${ if wal then "0x{color6.strip}" else "0x6be6e6" }"
+white = "${ if wal then "0x{color7.strip}" else "0xd9e0ee" }"
+
+[colors.primary]
+background = "${ if wal then "0x{color0.strip}" else "0x292a37" }"
+foreground = "${ if wal then "0x{color15.strip}" else "0xd9e0ee" }"
+
+[env]
+TERM = "xterm-256color"
+
+[font]
+size = 11
+
+[font.bold]
+family = "Source Code Pro"
+style = "Bold"
+
+[font.bold_italic]
+family = "Source Code Pro"
+style = "Bold Italic"
+
+[font.italic]
+family = "Source Code Pro"
+style = "Italic"
+
+[font.normal]
+family = "Source Code Pro"
+style = "Regular"
+
+[font.offset]
+x = 0
+y = 1
+
+[scrolling]
+history = 5000
+
+[shell]
+args = ["--login"]
+program = "fish"
+
+[window]
+title = "Alacritty"
+
+[window.class]
+general = "Alacritty"
+instance = "Alacritty"
+
+[window.padding]
+x = 6
+y = 6
+'';
+in {
   programs.alacritty = {
     enable = true;
-    settings = {
-      env.TERM = "xterm-256color";
+  };
 
-      window = {
-        padding = {
-          x = 6;
-	  y = 6;
-        };
-	title = "Alacritty";
-	class = {
-	  instance = "Alacritty";
-	  general = "Alacritty";
-	};
-      };
-
-      scrolling.history = 5000;
-
-      font = {
-        normal = makeFont "Regular";
-        bold = makeFont "Bold";
-        italic = makeFont "Italic";
-        bold_italic = makeFont "Bold Italic";
-	size = 11;
-	offset = {
-	  x = 0;
-	  y = 1;
-	};
-      };
-
-      colors = {
-        primary.foreground = "0xd9e0ee";
-        primary.background = "0x292a37";
-        normal.black = "0x303241";
-        normal.red = "0xec6a88";
-        normal.green = "0x3fdaa4";
-        normal.yellow = "0xefb993";
-        normal.blue = "0x3fc6de";
-        normal.magenta = "0xb771dc";
-        normal.cyan = "0x6be6e6";
-        normal.white = "0xd9e0ee";
-        bright.black ="0x393a4d";
-        bright.red ="0xe95678";
-        #bright.green ="0x29d398";
-        bright.green ="0x65ebcc";
-        bright.yellow ="0xefb993";
-        bright.blue ="0x26bbd9";
-        bright.magenta ="0xb072d1";
-        bright.cyan ="0x59e3e3";
-        bright.white ="0xd9e0ee";
-        draw_bold_text_with_bright_colors = true;
-      };
-
-      shell = {
-        program = "fish";
-	args = [ "--login" ];
-      };
-    };
+  home.file = if config.wal.enable then {
+    ".config/wpg/templates/alacritty.toml.base".text = toml true;
+    ".config/alacritty/alacritty.toml".source =
+      config.lib.file.mkOutOfStoreSymlink
+      "/home/zeroth/.config/wpg/templates/alacritty.toml";
+  }
+  else {
+    ".config/alacritty/alacritty.toml".text = toml false;
   };
 }
