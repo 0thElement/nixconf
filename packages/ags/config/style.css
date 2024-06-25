@@ -118,3 +118,7 @@ label.date {
 .wallpaperButton:hover {
     border-color: @active;
 }
+
+.wallpaperImage {
+    font-size: 10px;
+}

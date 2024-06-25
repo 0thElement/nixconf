@@ -1,0 +1,116 @@
+@import "./colors.rasi"
+
+* {
+    spacing: 2;
+}
+
+button.selected {
+    background-color: @selected-normal-background;
+    text-color: @selected-normal-foreground;
+}
+
+element {
+    border: 0;
+    padding: 5;
+    border-radius: 8;
+}
+
+element-icon {
+    size: 24px;
+    margin: 0 10 0 0;
+}
+
+element normal.normal {
+    background-color: @normal-background;
+    text-color: @normal-foreground;
+}
+
+element-text {
+    text-color: inherit;
+}
+
+element.alternate.active {
+    background-color: @alternate-active-background;
+    text-color: @alternate-active-foreground;
+}
+
+element.alternate.normal {
+    background-color: @alternate-normal-background;
+    text-color: @alternate-normal-foreground;
+}
+
+element.alternate.urgent {
+    background-color: @alternate-urgent-background;
+    text-color: @alternate-urgent-foreground;
+}
+
+element.normal.active {
+    background-color: @active-background;
+    text-color: @active-foreground;
+}
+
+element.normal.urgent {
+    background-color: @urgent-background;
+    text-color: @urgent-foreground;
+}
+
+element.selected.active {
+    background-color: @selected-active-background;
+    text-color: @selected-active-foreground;
+}
+
+element.selected.normal {
+    background-color: @selected-normal-background;
+    text-color: @selected-normal-foreground;
+}
+
+element.selected.urgent {
+    background-color: @selected-urgent-background;
+    text-color: @selected-urgent-foreground;
+}
+
+entry {
+    spacing: 0;
+    text-color: @normal-foreground;
+}
+
+inputbar {
+    children: [ entry ];
+    padding: 20px;
+    spacing: 0;
+    text-color: @normal-foreground;
+    background-color: @accent;
+}
+
+listview {
+    columns: 2;
+    fixed-height: 0;
+    padding: 20px 20px 20px ;
+    spacing: 7px;
+}
+
+mainbox {
+    children: [inputbar, listview];
+    border: 0;
+    padding: 0;
+}
+
+message {
+    padding: 1px ;
+}
+
+prompt {
+    spacing: 0;
+    text-color: @normal-foreground;
+}
+
+textbox {
+    text-color: @foreground;
+}
+
+window {
+    background-color: @background;
+    border-radius: 8;
+    border: 4;
+}
+

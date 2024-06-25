@@ -22,6 +22,11 @@ function setWallpaper(path) {
     App.applyCss(`${App.configDir}/style.css`)
 }
 
+function closeWindow() {
+    App.closeWindow('wallpaper')
+    files.value = ""
+}
+
 function OpenWallpaper() {
     return Widget.Button({
         child: Widget.Icon({ icon: "starred" }),
@@ -38,17 +43,23 @@ function Wallpaper(monitor = 0) {
         name: 'wallpaper',
         class_name: "wallpapers",
         monitor,
-        anchor: ["bottom", "left"],
+        anchor: ["bottom", "top", "left"],
+        exclusivity: "exclusive",
         layer: "overlay",
-        margins: [12, 12, 12, 12],
+        margins: [12, 0, 12, 12],
         visible: false,
-        child: Widget.Box({
-            class_name: 'wallpaperContainer',
-            vertical: true,
-            children: files.bind().as(x => x.split("\n")
-                .filter(x => x !== "")
-                .map(path => ImagesList(path)))
-        }),
+        child: Widget.Scrollable({
+            vscroll: "always",
+            hscroll: "never",
+            child: Widget.Box({
+                class_name: 'wallpaperContainer',
+                vertical: true,
+                children: files.bind().as(x => x.split("\n")
+                    .filter(x => x !== "")
+                    .sort()
+                    .map(path => ImagesList(path)))
+            }),
+        })
     })
 }
 
@@ -56,7 +67,7 @@ function ImagesList(path) {
     return Widget.Button({
         class_name: 'wallpaperButton',
         onPrimaryClick: () => {
-            App.closeWindow('wallpaper')
+            closeWindow();
             setWallpaper(path)
         },
         child: Widget.Icon({
