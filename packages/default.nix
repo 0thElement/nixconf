@@ -1,18 +1,17 @@
 { ... }:
 {
   imports = [
-    ./ags
-    ./alacritty
-    ./hyprland
+    ./ags #Bar
+    ./alacritty #Terminal emulator
+    ./hyprland #WM
     ./gtk
-    ./fish
-    ./rofi
+    ./fish #Shell
+    ./rofi #Launcher
     ./nvim
-    ./pywal
+    ./pywal #Colorscheme generation
     ./git
-    ./firefox
-    ./tmux
-    ./syncthing
-    ./extra
+    ./firefox #Firefox
+    ./tmux 
+    ./extra #Others
   ];
 }

@@ -1,32 +1,32 @@
 # 0thElement's NixOS configuration
 
-Functional, look-good-enough NixOS configuration.
+Functional, beautiful and fun NixOS configuration. Featuring hyprland and wpgtk / pywal.
 
-Disclaimer: This repository is mostly made for my personal use case. You'll probably have a bad time cloning and using it as is.
+Disclaimer: This repository is mostly made for personal uses. You'll probably have a bad time cloning and using it as is.
 
 ### Screenshots:
 
-![Appearance screenshot](assets/demo_appearance.png)
+![Desktop](assets/ss_desktop.png)
 
-![Neovim screenshot](assets/demo_nvim.png)
+![Neovim](assets/ss_nvim.png)
 
-### Credits:
+![Rofi](assets/ss_rofi.png)
 
-Transendium for the background image: https://www.pixiv.net/artworks/117817706
-
-Original configuration based on notusknot's dotfiles: https://github.com/notusknot/dotfiles-nix
+![Wallpaper selector](assets/ss_wpswitch.png)
 
 ### Info:
-- Terminal emulator: Alacritty
 - Window manager: Hyprland
-- Bar: Waybar. Vertical setup
+- Terminal emulator: Alacritty
+- Bar + wallpaper selector: AGS
+- Wallpaper: swww
+- GTK theme: Linea Nord Color
+- Color schemes are auto generated with wpgtk
 - Shell: Fish
 - Notification: None. I don't need one.
 - Launcher: Rofi (wayland fork)
-- Wallpaper: Hyprpaper
 - Screenshot: Grim + swappy
-- File explorer: Nautilus
-- Others: fcitx5, firefox, syncthing
+- File explorer: Thunar
+- Others: fcitx5, firefox, vesktop, syncthing
 
 ### Commands:
 

@@ -1,3 +1,4 @@
+# Common settings across NixOS machines
 { pkgs, pkgsNvim, inputs, ... }:
 {
   imports = [
@@ -154,7 +155,7 @@
         General.Experimental = true;
       };
     };
-    opengl.enable = true;
+    graphics.enable = true;
     nvidia.modesetting.enable = true;
   };
 

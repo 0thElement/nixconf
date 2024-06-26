@@ -22,6 +22,10 @@
     xwaylandvideobridge
   ];
 
+  services.syncthing = {
+    enable = true;
+  };
+
   home.file.".config/xdg-desktop-portal/hyprland-portals.conf".text = ''
     [preferred]
     default=hyprland;gtk

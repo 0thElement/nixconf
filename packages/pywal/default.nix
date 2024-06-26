@@ -3,9 +3,7 @@ let
   # Linea-Nord theme provided by wpgtk, installed in a more nix-y way
   linearNordSrc = pkgs.fetchFromGitHub {
     owner = "deviantfero";
-    repo = "wpgtk-templates";
-    rev = "4119a9afb27acf9e231c211cdfd12992c318499e";
-    hash = "sha256-LKIVasIO6ZjuRnY5NEj4NrtHchW8lafsnfh1IiEcoR0=";
+    repo = "wpgtk-templates"; rev = "4119a9afb27acf9e231c211cdfd12992c318499e"; hash = "sha256-LKIVasIO6ZjuRnY5NEj4NrtHchW8lafsnfh1IiEcoR0=";
   };
   gtkTheme = walEnable: pkgs.stdenvNoCC.mkDerivation {
     pname = "linea-nord theme";
@@ -55,11 +53,7 @@ in
     lib.mkMerge [
     (lib.mkIf config.wal.enable
       {
-        home.packages = with pkgs; [
-          wpgtk
-          xsettingsd
-        ];
-
+        home.packages = with pkgs; [ wpgtk ];
         home.file.".config/wpg/templates/gtk.css.base".source = theme + "/share/themes/linea-nord-color/dark.css.base";
         home.file.".config/wpg/wpg.conf".text = ''
           [settings]
