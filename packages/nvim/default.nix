@@ -22,8 +22,6 @@
     nil
     ripgrep
     fzf
-    nodejs
-    nodePackages.typescript-language-server
   ];
 
   home.sessionVariables = {
@@ -147,8 +145,15 @@
             return orig_util_open_floating_preview(contents, syntax, opts, ...)
           end
 
+          vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
+            pattern = "*.wgsl",
+
+            callback = function()
+              vim.bo.filetype = "wgsl"
+            end,
+          })
+
           require('lspconfig').nil_ls.setup({})
-          require('lspconfig').tsserver.setup({})
           EOF
         '';
       }
@@ -184,6 +189,7 @@
       rustaceanvim
       luasnip
       nvim-cmp cmp-buffer cmp-nvim-lsp cmp-path cmp-calc
+      wgsl-vim
 
       # Code actions
       {

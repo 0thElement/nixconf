@@ -2,13 +2,11 @@
 {
   home.username = "zeroth";
   home.homeDirectory = "/home/zeroth";
-  home.stateVersion = "23.11"; # Do not change this, future me!
+  home.stateVersion = "24.05";
 
   imports = [
-    ./../packages
+    ./../../packages/wsl.nix
   ];
-
-  wal.enable = true;
 
   home.sessionPath = [
     "/home/zeroth/.cargo/bin"

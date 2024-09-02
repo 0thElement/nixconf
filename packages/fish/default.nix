@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, nixConfigName, ... }:
 {
   imports = [ ./starship.nix ];
 
@@ -94,8 +94,8 @@
       
       #CONFIG
       toconf = "cd ~/nixconf/";
-      ns = "sudo nixos-rebuild switch --flake ~/nixconf#default";
-      nt = "sudo nixos-rebuild test --flake ~/nixconf#default";
+      ns = "sudo nixos-rebuild switch --flake ~/nixconf#${nixConfigName}";
+      nt = "sudo nixos-rebuild test --flake ~/nixconf#${nixConfigName}";
       v = "nvim";
       nc = "toconf && nvim . && prevd";
     };
